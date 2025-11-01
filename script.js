@@ -1,0 +1,37 @@
+let currentDoor = { joker: null, batman: null };
+
+document.addEventListener("DOMContentLoaded", () => {
+    const board = document.getElementById("board");
+    for (let i = 0; i < 9; i++) {
+        const door = document.createElement("div");
+        door.id = i.toString();
+        board.appendChild(door);
+    }
+
+    setCharacter("joker");
+    setCharacter("batman");
+
+    setInterval(() => setCharacter("joker"), 1500);
+    setInterval(() => setCharacter("batman"), 2000);
+});
+const getRandomDoorId = () => Math.floor(Math.random() * 9).toString();
+const setCharacter = (character) => {
+    clearDoor(character);
+    const randomDoorId = getRandomDoorId();
+    if (isDoorOccupied(randomDoorId)) return;
+    const randomDoor = document.getElementById(randomDoorId);
+    const img = document.createElement("img");
+    img.scr = `./images/${character}.png`;
+    img.src = randomDoor.appendChild(img);
+    currentDoor[character] = randomDoor;
+    setTimeout(() => clearDoor(character), 1000);
+};
+const isDoorOccupied = (randomDoorId) =>
+    currentDoor.joker?.id === randomDoorId ||
+    currentDoor.batman?.id === randomDoorId;
+
+const clearDoor = (character) => {
+    if (currentDoor[character]) {
+        currentDoor[character].innerHTML = "";
+    }
+};
