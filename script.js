@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
         board.appendChild(door);
     }
 
-    setCharacter("joker");
-    setCharacter("batman");
-
     setInterval(() => setCharacter("joker"), 1500);
     setInterval(() => setCharacter("batman"), 2000);
 });
@@ -21,8 +18,8 @@ const setCharacter = (character) => {
     if (isDoorOccupied(randomDoorId)) return;
     const randomDoor = document.getElementById(randomDoorId);
     const img = document.createElement("img");
-    img.scr = `./images/${character}.png`;
-    img.src = randomDoor.appendChild(img);
+    img.src = `./images/${character}.png`;
+    randomDoor.appendChild(img);
     currentDoor[character] = randomDoor;
     setTimeout(() => clearDoor(character), 1000);
 };
